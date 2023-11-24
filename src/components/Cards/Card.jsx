@@ -8,7 +8,7 @@ export const Card = ({content, id, index}) => {
   const [todo, setTodo] = useState(content.content)
   const [isDone, setDone] = useState(content.additionalData)
 
-  async function deleteButton() {
+  const deleteButton = async () => {
     const res = await fetch("https://devscale-mockapi.fly.dev/api/collections/notes/records/" + id, {
       method: "DELETE",
     })

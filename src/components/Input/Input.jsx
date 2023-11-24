@@ -1,28 +1,13 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
+import { NoteContext } from '@/Provider/Provider'
 
 const nameInput = "Create a new todo.."
 
 export const Input = () => {
-    const router = useRouter();
-    const [todo, setTodo] = useState("")
-    const [status, setStatus] = useState("todo")
 
-    async function createTodo() {
-        const res = await fetch("https://devscale-mockapi.fly.dev/api/collections/notes/records", {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({content:todo, user:"kemal@mock.com", additionalData:status})
-        })
-        router.refresh()
-    }
-
-    const addButton = () => {
-        createTodo();
-        setTodo('');
-    }
+  const {todo, setTodo, addButton} = useContext(NoteContext);
 
   return (
     <div>
@@ -33,13 +18,13 @@ export const Input = () => {
                 className="text-white w-full bg-transparent focus:outline-none" 
                 placeholder={nameInput} 
                 value={todo}
-                onChange={(e)=>setTodo(e.target.value)}
+                onChange={(e) => setTodo(e.target.value)}
             />
             <div 
                 onClick={todo.length > 0 ? ()=> addButton() : ()=>null} 
                 className="cursor-pointer hover:bg-cyan-500 rounded-full"
             >
-                <Image src={"/addbtn.svg"} width={30.0} height={30.0} alt={"add-button"} className=''/>
+                <Image src={"/addBtn.svg"} width={30.0} height={30.0} alt={"add-button"} className=''/>
             </div>
         </div>
     </div>
