@@ -15,12 +15,23 @@ export const Card = ({content, status, id, index}) => {
     router.refresh()
   }
 
+  async function updateStatus() {
+    setDone("done");
+    const res = await fetch(`https://devscale-mockapi.fly.dev/api/collections/notes/records/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ additionalData: isDone }),
+  })
+}
+
   return (
     <div id="container-task" className="">
         <div className="flex justify-start items-center gap-5 py-5 px-5 border-b-2 border-grayCustom">
           <div 
             className="cursor-pointer border-2 border-grayCustom p-3 rounded-full"
-            onClick={()=>setDone("done")}
+            onClick={()=>updateStatus()}
             style={{
               background: isDone  === "done" ? "rbg(70,227,255": "none",
               background: isDone === "done" ? "linear-gradient(146deg, rgba(70,227,255,1) 0%, rgba(251,0,255,1) 100%)": "none",
