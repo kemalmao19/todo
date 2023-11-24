@@ -13,14 +13,9 @@ export const Input = () => {
     async function createTodo() {
         const res = await fetch("https://devscale-mockapi.fly.dev/api/collections/notes/records", {
             method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({content:todo, user:"kemal@mock.com", additionalData:status})
         })
-        const data = await res.json()
-        console.log(data)
-        // return data
         router.refresh()
     }
 
@@ -44,7 +39,7 @@ export const Input = () => {
                 onClick={todo.length > 0 ? ()=> addButton() : ()=>null} 
                 className="cursor-pointer"
             >
-                <Image src="/addbtn.svg" width={30.0} height={30.0} alt={"add-button"} className=''/>
+                <Image src={"/addbtn.svg"} width={30.0} height={30.0} alt={"add-button"} className=''/>
             </div>
         </div>
     </div>

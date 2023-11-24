@@ -2,32 +2,29 @@ import { Header } from '@/components/Header/Header';
 import { Input } from '@/components/Input/Input';
 import { Layout } from '@/components/Layout/Layout';
 import { Card } from '@/components/Cards/Card'
-import Image from 'next/image'
-
-async function getNotes() {
-  const res = await fetch("https://devscale-mockapi.fly.dev/api/collections/notes/records?filter=(user='kemal@mock.com')", {
-    cache:"no-store"
-  });
-  const data = await res.json()
-
-  return data;
-}
+import { Indicator } from '@/components/Indicator/Indicator';
 
 export default async function Home() {
 
-  const { items } = await getNotes();
+  const res = await fetch("https://devscale-mockapi.fly.dev/api/collections/notes/records?filter=(user='kemal@mock.com')", {
+    cache: "no-store"
+  });
+  const { items } = await res.json();
 
   return (
-      <Layout>
+      <>
         <Header/>
         <Input data/>
-        <div className='mt-10 bg-lightBlue rounded-t-lg'>
-        {items.map(({id, content, additionalData}, index) => {
+        <div className='mt-10 bg-lightBlue rounded-xl'>
+        {items.map((content, index) => {
           return (
-            <Card key={id} content={content} status={additionalData} id={id} index={index}/>
+            <Card key={content.id} content={content} id={content.id} index={index}/>
           )
         })}
+        {items.length > 0 ? (
+          <Indicator content={items}/>
+        ): <></>}
         </div>
-      </Layout>
+      </>
   )
 }
