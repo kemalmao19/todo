@@ -1,34 +1,30 @@
 "use client"
 import React, { useState } from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 const nameInput = "Create a new todo.."
 
 export const Input = () => {
+    const router = useRouter();
     const [todo, setTodo] = useState("")
-    const [status, setStatus] = useState(false)
-    const [date, setDate] = useState("")
+    const [status, setStatus] = useState("todo")
 
     async function createTodo() {
-        const res = await fetch("https://v1.appbackend.io/v1/rows/YQzghSYuXLlt", {
+        const res = await fetch("https://devscale-mockapi.fly.dev/api/collections/notes/records", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify([{"name":todo,"isdone":status,"date":date}])
+            body: JSON.stringify({content:todo, user:"kemal@mock.com", additionalData:status})
         })
         const data = await res.json()
-        // console.log(data)
-        return data
+        console.log(data)
+        // return data
+        router.refresh()
     }
 
     const addButton = () => {
-        const d = new Date();
-        const year = d.getFullYear()
-        const month = d.getMonth()
-        const day = d.getDate()
-        const currentDate = `${year}-${month}-${day}`
-        setDate(currentDate);
         createTodo();
         setTodo('');
     }
@@ -38,13 +34,14 @@ export const Input = () => {
         <div className="flex justify-start items-center gap-5 mt-10 py-3 px-5 bg-lightBlue rounded-xl">
             <input 
                 type_="text" 
+                id='input'
                 className="text-white w-full bg-transparent focus:outline-none" 
                 placeholder={nameInput} 
                 value={todo}
                 onChange={(e)=>setTodo(e.target.value)}
             />
             <div 
-                onClick={()=> addButton()} 
+                onClick={todo.length > 0 ? ()=> addButton() : ()=>null} 
                 className="cursor-pointer"
             >
                 <Image src="/addbtn.svg" width={30.0} height={30.0} alt={"add-button"} className=''/>

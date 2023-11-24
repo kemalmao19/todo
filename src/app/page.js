@@ -5,7 +5,7 @@ import { Card } from '@/components/Cards/Card'
 import Image from 'next/image'
 
 async function getNotes() {
-  const res = await fetch("https://v1.appbackend.io/v1/rows/YQzghSYuXLlt", {
+  const res = await fetch("https://devscale-mockapi.fly.dev/api/collections/notes/records?filter=(user='kemal@mock.com')", {
     cache:"no-store"
   });
   const data = await res.json()
@@ -15,17 +15,19 @@ async function getNotes() {
 
 export default async function Home() {
 
-  const { data } = await getNotes();
+  const { items } = await getNotes();
 
   return (
       <Layout>
         <Header/>
         <Input data/>
-        {data.map(({_id, name, isdone, date}, index) => {
+        <div className='mt-10 bg-lightBlue rounded-t-lg'>
+        {items.map(({id, content, additionalData}, index) => {
           return (
-            <Card key={_id} content={name} status={isdone} date={date} index={index}/>
+            <Card key={id} content={content} status={additionalData} id={id} index={index}/>
           )
         })}
+        </div>
       </Layout>
   )
 }

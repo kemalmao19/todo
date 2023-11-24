@@ -11,6 +11,9 @@ module.exports = {
         deepBlue: '#181824',
         lightBlue: '#25273C'
       },
+      fontFamily: {
+        comic: ['Comic Neue', 'cursive'],
+      }
     },
   },
   plugins: [],
