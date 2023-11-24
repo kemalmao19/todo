@@ -32,7 +32,7 @@ export const Card = ({content, id, index}) => {
       <div id="container-task" className="">
           <div className="flex justify-start items-center gap-5 py-5 px-5 border-b-2 border-grayCustom">
             <div 
-              className="cursor-pointer border-2 border-grayCustom p-3 rounded-full"
+              className="cursor-pointer border-2 border-grayCustom hover:border-gray-300 p-3 rounded-full"
               onClick={()=>changeStatus()}
               style={{
                 background: isDone  === "done" ? "rbg(70,227,255": "none",
@@ -46,7 +46,7 @@ export const Card = ({content, id, index}) => {
                 textDecoration: isDone === "done" ? "line-through": "none",
                 fontStyle: isDone === "done" ? "italic" : "none",
                 }}>{todo}</div>
-            <div className='cursor-pointer' onClick={deleteButton}>
+            <div className='cursor-pointer rounded-full hover:bg-red-200' onClick={deleteButton}>
               <Image src={"/delBtn.svg"} width={30.0} height={30.0} alt='delete'/>
             </div>
           </div>

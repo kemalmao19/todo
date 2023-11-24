@@ -37,7 +37,7 @@ export const Input = () => {
             />
             <div 
                 onClick={todo.length > 0 ? ()=> addButton() : ()=>null} 
-                className="cursor-pointer"
+                className="cursor-pointer hover:bg-cyan-500 rounded-full"
             >
                 <Image src={"/addbtn.svg"} width={30.0} height={30.0} alt={"add-button"} className=''/>
             </div>
