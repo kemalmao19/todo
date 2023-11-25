@@ -10,14 +10,10 @@ export const CardContainer = ({ items }) => {
   
   const filteredItems = items.filter((content) => {
     switch (filter) {
-      case 'all':
-        return true;
-      case 'active':
-        return content.additionalData === 'todo';
-      case 'completed':
-        return content.additionalData === 'done';
-      default:
-        return true;
+      case 'all': return true;
+      case 'active': return content.additionalData === 'todo';
+      case 'completed': return content.additionalData === 'done';
+      default: return true;
     }
   });
 
