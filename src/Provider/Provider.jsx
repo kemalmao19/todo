@@ -8,6 +8,7 @@ export const NoteProvider = ({ children }) => {
   const router = useRouter();
   const [todo, setTodo] = useState("")
   const [status, setStatus] = useState("todo")
+  const [filter, setFilter] = useState("all")
 
   const createTodo = async () => {
     const res = await fetch("https://devscale-mockapi.fly.dev/api/collections/notes/records", {
@@ -34,7 +35,7 @@ export const NoteProvider = ({ children }) => {
 
   return (
     <NoteContext.Provider
-      value={{todo, status, setTodo, addButton,  clearAllTasks }}
+      value={{todo, status, filter, setFilter, setTodo, addButton,  clearAllTasks }}
     >
       {children}
     </NoteContext.Provider>

@@ -1,8 +1,7 @@
 import { Header } from '@/components/Header/Header';
 import { Input } from '@/components/Input/Input';
-import { Layout } from '@/components/Layout/Layout';
-import { Card } from '@/components/Cards/Card'
-import { Indicator } from '@/components/Indicator/Indicator';
+import { Filter } from '@/components/Filter/Filter';
+import { CardContainer } from '@/components/Cards/CardContainer';
 
 export default async function Home() {
 
@@ -16,15 +15,9 @@ export default async function Home() {
         <Header/>
         <Input data/>
         <div className='mt-10 bg-lightBlue rounded-xl'>
-        {items.map((content, index) => {
-          return (
-            <Card key={content.id} content={content} id={content.id} index={index}/>
-          )
-        })}
-        {items.length > 0 ? (
-          <Indicator content={items}/>
-        ): <></>}
+          <CardContainer items={items}/>
         </div>
+        <Filter />
       </>
   )
 }

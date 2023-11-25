@@ -11,7 +11,7 @@ export const Input = () => {
 
   return (
     <div>
-        <div className="flex justify-start items-center gap-5 mt-10 py-3 px-5 bg-lightBlue rounded-xl">
+        <div className="flex justify-start items-center gap-5 mt-10 p-5 bg-lightBlue rounded-xl">
             <input 
                 type_="text" 
                 id='input'

@@ -1,23 +1,26 @@
-import React from 'react'
-import React, { useState } from 'react'
-import { useRouter } from 'next/navigation'
+"use client"
+import React, { useContext } from 'react'
+import { NoteContext } from '@/Provider/Provider'
 
-export const Filter = ({content}) => {
-    const router = useRouter()
-    const [todo, setTodo] = useState(content.content)
-    const [isDone, setDone] = useState(content.additionalData)
-    const [filter, setFilter] = useState("all")
+export const Filter = () => {
+    const {filter, setFilter} = useContext(NoteContext)
 
-    const filterTodos = () => {
-        switch (filter) {
-          case "all": return todo;
-          case "active": return todo.filter(todo => todo.additionalData === "todo");
-          case "completed": return todo.filter(todo => todo.additionalData === "done");
-          default: return todo;
-        }
-      };
+    const changeFilter = (x) => {
+        setFilter(x)
+        // router.refresh()
+    }
 
   return (
-    <div>Filter</div>
+    <div className='mt-10 flex justify-center items-center gap-5 p-3 text-grayCustom bg-lightBlue rounded-xl'>
+        <button
+            onClick={()=>changeFilter("all")} 
+            style={{color: filter === "all" ? "violet": ""}}>All</button>
+        <button 
+            onClick={()=>changeFilter("active")} 
+            style={{color: filter === "active" ? "violet": ""}}>Active</button>
+        <button 
+            onClick={()=>changeFilter("completed")} 
+            style={{color: filter === "completed" ? "violet": ""}}>Completed</button>
+    </div>
   )
 }
