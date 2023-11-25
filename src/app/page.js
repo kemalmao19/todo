@@ -2,6 +2,7 @@ import { Header } from '@/components/Header/Header';
 import { Input } from '@/components/Input/Input';
 import { Filter } from '@/components/Filter/Filter';
 import { CardContainer } from '@/components/Cards/CardContainer';
+import { Footer } from '@/components/Footer/Footer';
 
 export default async function Home() {
 
@@ -18,6 +19,7 @@ export default async function Home() {
           <CardContainer items={items}/>
         </div>
         <Filter />
+        <Footer/>
       </>
   )
 }
