@@ -44,8 +44,11 @@ export const Card = ({content, id, index}) => {
               className="text-gray-300 font-comic w-full focus:outline-none"
               style={{
                 textDecoration: isDone === "done" ? "line-through": "none",
+                color: isDone === "done" ? "#6F6F6F" :"",
                 fontStyle: isDone === "done" ? "italic" : "none",
-                }}>{todo}</div>
+                }}>{todo}
+            </div>
+
             <div className='cursor-pointer rounded-full hover:bg-red-200' onClick={deleteButton}>
               <Image src={"/delBtn.svg"} width={30.0} height={30.0} alt='delete'/>
             </div>

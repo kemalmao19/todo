@@ -1,10 +1,24 @@
 # Todo (CRUD) App
 
-- API
-- Javascript
-- Nextjs
+This is a CRUD app to create a todo list, using Next.js as the tech stack and API.
 
 ![screenshot](/public/screenshot/todo-lemon.png)
+
+## Features
+
+- Create, read, update, and delete (CRUD) todo items
+- Filter todo items by status (completed or pending)
+
+## Tech Stack
+
+- Next.js: Frontend framework
+- React: UI library
+- TypeScript: Programming language
+- JSON: Data format
+
+## API
+
+The API is responsible for handling all data operations, such as creating, reading, updating, and deleting todo items.
 
 ## Getting Started
 
