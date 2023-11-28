@@ -1,6 +1,7 @@
 "use client"
 import React, { createContext, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { API_URL } from '@/config';
 
 export const NoteContext = createContext();
 
@@ -11,7 +12,7 @@ export const NoteProvider = ({ children }) => {
   const [filter, setFilter] = useState("all")
 
   const createTodo = async () => {
-    const res = await fetch("https://devscale-mockapi.fly.dev/api/collections/notes/records", {
+    const res = await fetch(`${API_URL}`, {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({content:todo, user:"kemal@mock.com", additionalData:status})
@@ -26,7 +27,7 @@ export const NoteProvider = ({ children }) => {
 
   const clearAllTasks = (list) => {
     list.map(async(i)=>{
-        const res = await fetch("https://devscale-mockapi.fly.dev/api/collections/notes/records/"+i.id, {
+        const res = await fetch(`${API_URL}`+ "/" +i.id, {
             method: "DELETE",
           })
           router.refresh()

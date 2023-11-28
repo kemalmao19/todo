@@ -2,6 +2,7 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { API_URL } from '@/config'
 
 export const Card = ({content, id, index}) => {
   const router = useRouter()
@@ -9,7 +10,7 @@ export const Card = ({content, id, index}) => {
   const [isDone, setDone] = useState(content.additionalData)
 
   const deleteButton = async () => {
-    const res = await fetch("https://devscale-mockapi.fly.dev/api/collections/notes/records/" + id, {
+    const res = await fetch(`${API_URL}/${id}`, {
       method: "DELETE",
     })
     router.refresh()
@@ -19,7 +20,7 @@ export const Card = ({content, id, index}) => {
     const newStatus = isDone === "todo" ? "done" : "todo";
     setDone(newStatus);
  
-    const response = await fetch(`https://devscale-mockapi.fly.dev/api/collections/notes/records/${id}`, {
+    const response = await fetch(`${API_URL}/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ additionalData: newStatus }),
