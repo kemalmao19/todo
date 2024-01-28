@@ -8,7 +8,6 @@ import { fetcher } from './lib/feth';
 export default async function Home() {
 
   const res = await fetcher()
-  console.log(res)
 
   return (
       <>
