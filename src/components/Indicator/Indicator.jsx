@@ -6,7 +6,7 @@ export const Indicator = ({content}) => {
 
   const { clearAllTasks } = useContext(NoteContext);
 
-  const taskLeft = content.filter((i) => i.additionalData === 'todo').length;
+  const taskLeft = content.filter((i) => i.status === 'todo').length;
 
   return (
     <div className="flex justify-between items-center p-5 text-grayCustom font-comic">

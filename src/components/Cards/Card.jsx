@@ -2,17 +2,15 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { API_URL } from '@/config'
+import { updater, deleter } from '@/app/lib/feth'
 
 export const Card = ({content, id, index}) => {
   const router = useRouter()
-  const [todo, setTodo] = useState(content.content)
-  const [isDone, setDone] = useState(content.additionalData)
+  const [todo, setTodo] = useState(content.text)
+  const [isDone, setDone] = useState(content.status)
 
   const deleteButton = async () => {
-    const res = await fetch(`${API_URL}/${id}`, {
-      method: "DELETE",
-    })
+    const res = await deleter(id)
     router.refresh()
   }
 
@@ -20,11 +18,7 @@ export const Card = ({content, id, index}) => {
     const newStatus = isDone === "todo" ? "done" : "todo";
     setDone(newStatus);
  
-    const response = await fetch(`${API_URL}/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ additionalData: newStatus }),
-    });
+    const res = updater(id, newStatus)
     router.refresh()
   }
 
